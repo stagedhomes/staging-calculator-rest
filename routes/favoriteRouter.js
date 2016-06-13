@@ -33,7 +33,7 @@ favoriteRouter.route('/')
             } // function(err, favorite)
         ); // Favorites.findOneAndUpdate
 
-        console.log("You added the dish to your favorites!");
+        console.log("You added the ROSI result to your favorites!");
     }) // .post
 
     // drops the favorites collection
