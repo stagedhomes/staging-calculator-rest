@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 // Models
-var Dishes = require('../models/dishes');
 var User = require('../models/user');
 var Favorites = require('../models/favorites');
 var Verify = require('./verify');
@@ -16,7 +15,6 @@ favoriteRouter.use(bodyParser.json());
 favoriteRouter.route('/')
     .get(Verify.verifyOrdinaryUser, function (req, res, next) {
         Favorites.find({'postedBy': req.decoded._doc._id})
-            .populate('dishes')
             .populate('postedBy')
             .exec(function(err, favorite){
                 if (err) next(err);
@@ -28,7 +26,6 @@ favoriteRouter.route('/')
     .post(Verify.verifyOrdinaryUser, function (req, res, next) {
         Favorites.findOneAndUpdate(
             { postedBy: req.decoded._doc._id },
-            { $addToSet: { dishes: req.body }},
             { upsert:true, new:true },
             function(err, favorite) {
                 if (err) throw(err);
@@ -57,7 +54,6 @@ favoriteRouter.route('/:favoriteId')
         // find logged on user's favorites
         Favorites.findOneAndUpdate(
             { postedBy: req.decoded._doc._id },
-            { $pull: { dishes: req.params.favoriteId } },
             { "new": true },
             function(err, favDish) {
                 if (err) throw err;
