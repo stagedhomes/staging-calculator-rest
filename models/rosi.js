@@ -22,43 +22,60 @@ var rosiSchema = new Schema({
 
     // Mortgage Amount per Month $ 3000
     mortage: {
-        type: number
+        type: number,
+        min: 0,
+        required: true
     },
 
     // Monthly Utilities $ 500
     utilities: {
-        type: number
+        type: number,
+        min: 0,
+        required: true
     },
 
     // Staging Investment
     stagingInvestment: {
-        type: number
+        type: number,
+        min: 0,
+        required: true
     },
 
     /* ==================================================================
         Return on Staging Investment
     ================================================================== */
     // Cost to Sell Your Home Unstaged $ 10500
+    unstagedCost: {
+        type: number,
+        min: 0,
+        required: true
+    },
+
     // Cost to Sell Your Home Staged $ 4400
+    stagedCost: {
+        type: number,
+        min: 0,
+        required: true
+    },
+
     // Savings When You SELL Your Home ASP Staged $ 6100
+    stagedSavings: {
+        type: number,
+        min: 0,
+        required: true
+    },
+
     // Return on Staging Investment (ROSI®)
-
-    name: {
-        type: String,
-        required: true,
-        unique: true
+    rosiResult: {
+        type: SchemaTypes.Double
     },
 
-    label: {
-        type: String,
-        required: false,
-        unique: false,
-        default: ''
-    },
-
+    /* ==================================================================
+        ROSI Result Description
+    ================================================================== */
     description: {
         type: String,
-        required: true,
+        required: false,
         unique: false
     }
 }, {

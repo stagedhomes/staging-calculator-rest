@@ -20,8 +20,6 @@ db.once('open', function () {
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var leaderRouter = require('./routes/leaderRouter');
-var favoriteRouter = require('./routes/favoriteRouter');
 
 var app = express();
 
